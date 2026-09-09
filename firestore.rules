@@ -1,0 +1,26 @@
+// ============================================================================
+// Firestore Security Rules — Smart Attendance Management System
+// ============================================================================
+//
+// SIGN-IN HAS BEEN REMOVED APP-WIDE. There is no more Firebase Auth session
+// on the client, so `request.auth` is always null and every role-based rule
+// that used to live here (see git history for the original, documented
+// version) would now deny all client reads/writes. This file is left fully
+// open instead so the app keeps working with no login.
+//
+// This means EVERY document in this database is readable and writable by
+// anyone who can reach this Firebase project's client config (which is
+// public by nature — see src/firebase/config.ts). There is no access
+// control left at all. Do not deploy this to a project holding real student
+// data; it is only appropriate for local/private use.
+// ============================================================================
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

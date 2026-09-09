@@ -1,0 +1,27 @@
+node_modules
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+.env
+.env.local
+.env.*.local
+server/node_modules
+server/dist
+functions/node_modules
+functions/lib
+.firebase
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+*.log
+
+# Personal Claude Code tool permissions — not shared project config
+.claude/settings.local.json
+
+# Stray build output of tsconfig.node.json compiling vite.config.ts
+/vite.config.js
+/vite.config.d.ts

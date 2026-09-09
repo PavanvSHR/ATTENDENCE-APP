@@ -1,0 +1,27 @@
+{
+  "name": "attendance-functions",
+  "version": "1.0.0",
+  "description": "Cloud Functions for the Smart Attendance Management System — notification fan-out triggers and scheduled maintenance jobs, running with Firebase Admin privileges alongside server/.",
+  "private": true,
+  "main": "lib/index.js",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^5.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.3"
+  }
+}

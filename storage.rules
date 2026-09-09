@@ -1,0 +1,33 @@
+// ============================================================================
+// Firebase Storage Security Rules — Smart Attendance Management System
+// ============================================================================
+//
+// SIGN-IN HAS BEEN REMOVED APP-WIDE. There is no more Firebase Auth session
+// on the client, so `request.auth` is always null and the original owner/
+// admin checks here (see git history) would deny all client access. This
+// file is left fully open instead so profile photo upload/view keeps
+// working with no login.
+//
+// This means anyone who can reach this Storage bucket can read and write
+// every file in it. Do not deploy this to a project holding real student
+// data; it is only appropriate for local/private use.
+// ============================================================================
+
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /profilePhotos/{uid}/{fileName} {
+      allow read: if true;
+      // Note: `allow write` would OR-override this and admit any upload
+      // regardless of size/type, so the hygiene check only holds if there
+      // is no broader unconditional `write` rule on this path.
+      allow create: if request.resource.size < 5 * 1024 * 1024 && request.resource.contentType.matches("image/.*");
+      allow delete: if true;
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if true;
+    }
+  }
+}
